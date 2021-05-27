@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EmptyActivityApplication</string>
+    <string name="spinner_title">Spinner</string>
+    <string name="cases">1000</string>
+</resources>
