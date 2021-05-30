@@ -24,12 +24,19 @@
                 android:layout_height="wrap_content"
                 android:text="TN covid count:"/>
             <TextView
-                android:id="@+id/chncovidcount"
+                android:id="@+id/distcovidcount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="CHN person count:" />
+                android:text="TN person count:" />
+            <TextView
+                android:id="@+id/distexpiredcount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="TN expired count:" />
             <Spinner
                 android:id="@+id/spinner_title"
                 android:layout_width="fill_parent"
