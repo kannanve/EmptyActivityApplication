@@ -7,82 +7,103 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     tools:visibility="visible">
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tncovidcount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TN covid count:"/>
-            <TextView
-                android:id="@+id/distcovidcount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="TN person count:" />
-            <TextView
-                android:id="@+id/distexpiredcount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="TN expired count:" />
-            <Spinner
-                android:id="@+id/spinner_title"
+            <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableRow
+                android:id="@+id/row1"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:prompt="@string/spinner_title"
-                android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                app:srcCompat="@drawable/avatarvenky"
-                tools:layout_editor_absoluteX="129dp"
-                tools:layout_editor_absoluteY="7dp" />
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:gravity="center"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/athuwithhair" />
-
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:gravity="center"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/mottai"
-                tools:srcCompat="@drawable/mottai" />
-
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:gravity="center"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/anuatucheemu"
-                tools:srcCompat="@drawable/anuatucheemu" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tncovidcount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TN covid count:"
+                    android:background="#b0b0b0"
+                    android:padding="18dip"
+                    android:textColor="#000"
+                    android:textSize="12dp"/>
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/avatarvenky"/>
+            </TableRow>
+                <TableRow
+                    android:id="@+id/row2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select district:"
+                    android:background="#b0b0a1"
+                    android:padding="18dip"
+                    android:textColor="#000"
+                    android:textSize="12dp"/>
+                <Spinner
+                    android:id="@+id/spinner_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"
+                    android:visibility="visible" />
+                </TableRow>
+                <TableRow
+                    android:id="@+id/row3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Infected Count:"
+                        android:background="#b0b0a1"
+                        android:padding="18dip"
+                        android:textColor="#000"
+                        android:textSize="12dp"/>
+                <TextView
+                    android:id="@+id/distcovidcount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="TN person count:"
+                    android:padding="18dip"
+                    android:textSize="14dp"
+                    />
+                </TableRow>
+                <TableRow
+                    android:id="@+id/row4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Expired Count:"
+                        android:background="#b0b0a1"
+                        android:padding="18dip"
+                        android:textColor="#000"
+                        android:textSize="12dp"/>
+                    <TextView
+                    android:id="@+id/distexpiredcount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FF0000"
+                    android:padding="18dip"
+                    android:textColor="#000"
+                    android:textSize="14dp"
+                    android:inputType="textPersonName"
+                    android:text="TN expired count:" />
+            </TableRow>
+                <TableRow
+                    android:id="@+id/row5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/caution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:padding="18dip"
+                    android:textSize="12dp"/>
+                </TableRow>
+        </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

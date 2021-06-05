@@ -40,6 +40,7 @@ public class CovidDataProcessor {
         covidData = new CovidData();
         //Using the JSON simple library parse the string into a json object
         parser = new MyJsonParser();
+        JSONObject distData;
         JSONObject data_obj = parser.parseJson(jsonData.toString());
         System.out.println(jsonData.toString());
 
@@ -49,9 +50,13 @@ public class CovidDataProcessor {
         System.out.println("allDistrict data " + allDistObject.toJSONString());
         JSONObject distObject = (JSONObject)allDistObject.get(district);
         System.out.println("District data  " + distObject.toJSONString());
-        JSONObject distData = distObject.get(CovidConstants.CODE_TODAYSCOUNT)!=null?
-                (JSONObject)distObject.get(CovidConstants.CODE_TODAYSCOUNT):
-                (JSONObject)distObject.get(CovidConstants.CODE_TEMPCOUNT);
+        if (distObject.get(CovidConstants.CODE_TODAYSCOUNT)!=null) {
+            distData = (JSONObject)distObject.get(CovidConstants.CODE_TODAYSCOUNT);
+            covidData.setTodaysData(true);
+        } else {
+            covidData.setTodaysData(false);
+            distData = (JSONObject)distObject.get(CovidConstants.CODE_TEMPCOUNT);
+        }
         System.out.println("delta value " + distData);
         if (distData != null) {
             covidData.setLocation(district);

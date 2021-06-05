@@ -8,4 +8,5 @@ public class CovidConstants {
     public static final String CODE_CONFIRMED="confirmed";
     public static final String CODE_DECEASED="deceased";
     public static final String CODE_DISTRICTS="districts";
+    public static final String TEXT_CAUTION="Caution: Bad data";
 }

@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         covidService = new CovidService();
         covidDataProcessor = new CovidDataProcessor();
         StringBuffer inlinebuffer = covidService.fetchCovidData();
+        JSONObject tnData;
+        covidData = new CovidData();
 
         List<String> districtList = covidDataProcessor.fetchDistrictList(inlinebuffer);
         // Spinner element
@@ -58,9 +60,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //Get the required object from the above created object
         JSONObject tnObj = (JSONObject) data_obj.get(CovidConstants.CODE_TAMILNADU);
-        JSONObject tnData = tnObj.get(CovidConstants.CODE_TODAYSCOUNT) !=null?
-                (JSONObject) tnObj.get(CovidConstants.CODE_TODAYSCOUNT):
-                (JSONObject) tnObj.get(CovidConstants.CODE_TEMPCOUNT);
+
+        if (tnObj.get(CovidConstants.CODE_TODAYSCOUNT)!=null) {
+            tnData = (JSONObject)tnObj.get(CovidConstants.CODE_TODAYSCOUNT);
+            covidData.setTodaysData(true);
+        } else {
+            covidData.setTodaysData(false);
+            tnData = (JSONObject)tnObj.get(CovidConstants.CODE_TEMPCOUNT);
+        }
 
         //Get the required data using its key
         System.out.println("******I am parsing data returned by URL now");
@@ -68,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 CovidConstants.CODE_CONFIRMED));
         System.out.println("Today dead count: " + tnData.get(CovidConstants.CODE_DECEASED));
         final TextView covidcount = (TextView) findViewById(R.id.tncovidcount);
-        covidcount.setText(covidcount.getText() + tnData.get(
-                CovidConstants.CODE_CONFIRMED).toString());
+        covidcount.setText("TN Count: " + tnData.get(CovidConstants.CODE_CONFIRMED).toString());
 
         JSONObject distObject = (JSONObject)tnObj.get(CovidConstants.CODE_DISTRICTS);
         JSONObject chnObject = (JSONObject)distObject.get(CovidConstants.CODE_CHENNAI);
@@ -77,12 +83,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ? (JSONObject)chnObject.get(CovidConstants.CODE_TODAYSCOUNT):
                 (JSONObject)chnObject.get(CovidConstants.CODE_TEMPCOUNT);
         final TextView distcovidcount = (TextView) findViewById(R.id.distcovidcount);
-        distcovidcount.setText(distcovidcount.getText() + chnData.get(
-                CovidConstants.CODE_CONFIRMED).toString());
+        distcovidcount.setText(chnData.get(CovidConstants.CODE_CONFIRMED).toString());
 
         final TextView distexpiredcount = (TextView) findViewById(R.id.distexpiredcount);
-        distexpiredcount.setText(distexpiredcount.getText() + chnData.get(
-                CovidConstants.CODE_CONFIRMED).toString());
+        distexpiredcount.setText(chnData.get(CovidConstants.CODE_CONFIRMED).toString());
+
+        final TextView caution = (TextView) findViewById(R.id.caution);
+        if (covidData.isTodaysData()==false) {
+                caution.setText(CovidConstants.TEXT_CAUTION);
+        } else {
+            caution.setText("");
+        }
     }
 
     @Override
@@ -98,10 +109,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         covidData = covidDataProcessor.processTNDistrictData(district,inlinebuffer);
 
         final TextView distCovidCount = (TextView) findViewById(R.id.distcovidcount);
-        distCovidCount.setText(district +" covid count: " + covidData.getInfectedCount());
+        distCovidCount.setText(covidData.getInfectedCount());
 
         final TextView distexpiredcount = (TextView) findViewById(R.id.distexpiredcount);
-        distexpiredcount.setText(district + " expired count: " + covidData.getDeceasedCount());
+        distexpiredcount.setText(covidData.getDeceasedCount());
+
+        final TextView caution = (TextView) findViewById(R.id.caution);
+        if (covidData.isTodaysData()==false) {
+            caution.setText(CovidConstants.TEXT_CAUTION);
+        } else {
+            caution.setText("");
+        }
         // Showing selected spinner district
         Toast.makeText(parent.getContext(), "Selected: " + district, Toast.LENGTH_LONG).show();
     }
